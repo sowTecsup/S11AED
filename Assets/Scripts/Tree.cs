@@ -63,7 +63,7 @@ public class Tree<T>
 
         foreach (var child in node.Children)//->añadimos a sus hijos
         {
-            TraversePreOrder(child, action);
+            TraversePostOrder(child, action);
         }
 
         action(node.Value); //-> Registramos el nodo
