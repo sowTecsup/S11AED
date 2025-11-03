@@ -46,14 +46,46 @@ public class Tree<T>
         return true;
     }
 
-    public void TraverPreOrder(TreeNode<T> node , Action<T> action)
+    public void TraversePreOrder(TreeNode<T> node , Action<T> action)
     {
         if(node == null) return;
         action(node.Value);
 
         foreach (var child in node.Children)
         {
-            TraverPreOrder(child, action);
+            TraversePreOrder(child, action);
+        }
+    }
+
+    public void TraversePostOrder(TreeNode<T> node, Action<T> action)
+    {
+        if (node == null) return;
+
+        foreach (var child in node.Children)//->añadimos a sus hijos
+        {
+            TraversePreOrder(child, action);
+        }
+
+        action(node.Value); //-> Registramos el nodo
+    }
+    public void TraverseLevelOrder(TreeNode<T> node, Action<T> action)
+    {
+        if (node == null) return;
+
+
+        Queue<TreeNode<T>> queue = new Queue<TreeNode<T>>();
+        queue.Enqueue(node);
+
+        while (queue.Count > 0)
+        {
+            TreeNode<T> current = queue.Dequeue(); 
+            action(current.Value);  
+
+            foreach(var child in current.Children)
+            {
+                queue.Enqueue(child);
+            }
+
         }
     }
 }

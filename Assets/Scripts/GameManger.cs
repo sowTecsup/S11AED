@@ -5,7 +5,7 @@ public class GameManger : MonoBehaviour
     private Tree<string> namesTree;
     void Start()
     {
-        namesTree.TraverPreOrder(namesTree.Root, v => 
+        namesTree.TraversePreOrder(namesTree.Root, v => 
         {
             Debug.Log(v);
         });
