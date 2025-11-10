@@ -14,7 +14,11 @@ public class BinaryTree<T>
     {
         BinaryTreeNode<T> parentNode = Find(Root, parentValue);
 
-        if (parentNode != null) return false;
+        if (parentNode == null)
+        {
+            Debug.Log("Padre no encontrado");
+            return false;
+        }
 
         BinaryTreeNode<T> childNode = new BinaryTreeNode<T>(childValue);
 
@@ -44,10 +48,10 @@ public class BinaryTree<T>
             return node;
 
         //->Si fallo realizco la busqueda
-        BinaryTreeNode<T> leftResult = Find(node, value);
+        BinaryTreeNode<T> leftResult = Find(node.Left, value);
         if(leftResult != null) return leftResult;
 
-        BinaryTreeNode<T> rightResult = Find(node, value);
+        BinaryTreeNode<T> rightResult = Find(node.Right, value);
         return rightResult;
     }
     public void TraverseInOrder(BinaryTreeNode<T> node, Action<T> action)
