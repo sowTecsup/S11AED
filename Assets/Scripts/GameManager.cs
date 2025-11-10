@@ -18,19 +18,18 @@ public class GameManager : MonoBehaviour
 
 
 
-        rootBinaryTree.AddChild(8, 3, true);
-        rootBinaryTree.AddChild(8, 10, false);
+        rootBinaryTree.AddChild(8, 1, true);
+        rootBinaryTree.AddChild(8, 5, false);
 
-        rootBinaryTree.AddChild(3, 1, true);
-        rootBinaryTree.AddChild(3, 6, false);
+        rootBinaryTree.AddChild(1, 7, false);
 
-        rootBinaryTree.AddChild(6, 4, true);
-        rootBinaryTree.AddChild(6, 7, false);
+        rootBinaryTree.AddChild(7, 10, false);
 
+        rootBinaryTree.AddChild(5, 10, true);
+        rootBinaryTree.AddChild(5, 6, false);
 
-        rootBinaryTree.AddChild(10, 14);
+        rootBinaryTree.AddChild(10, 4, true);
 
-        rootBinaryTree.AddChild(14, 13);
 
         rootBinaryTree.TraverseInOrder(rootBinaryTree.Root, v => Debug.Log(v));
 
