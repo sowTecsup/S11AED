@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameManger : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private Tree<string> namesTree;
 
