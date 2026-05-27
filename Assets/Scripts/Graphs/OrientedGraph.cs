@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Sowtank.Collections;
 
 namespace Sowtank.Collections.Graphs
 {
@@ -78,6 +80,17 @@ namespace Sowtank.Collections.Graphs
             }
             Debug.Log(context);
         }
+
+        public void BFS(Node<T> startNode , Action<Node<T>> action)//->colas o pilas?
+        {
+            List<Node<T>> visited = new List<Node<T>>(); //-> los que ya revise
+            MyQueue<Node<T>> queue = new MyQueue<Node<T>>();    //-> los que estoy revisando
+
+            queue.Enqueue(startNode);
+            visited.Add(startNode);
+
+        }
+
 
 
 

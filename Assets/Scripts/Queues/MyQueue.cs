@@ -1,66 +1,70 @@
 using UnityEngine;
 
-public class MyQueue<T>
+namespace Sowtank.Collections
 {
-    #region Properties/Privates
-    private QueueNode<T> head;
-    private QueueNode<T> tail;
-    private int count;
-    #endregion
-
-    #region Public Methods
-    //-> O(1)
-    public void Enqueue(T value)
+    public class MyQueue<T>
     {
-        QueueNode<T> newNode = new(value);
-        count++;
+        #region Properties/Privates
+        private QueueNode<T> head;
+        private QueueNode<T> tail;
+        private int count;
+        #endregion
 
-        if(head == null && tail == null)
+        #region Public Methods
+        //-> O(1)
+        public void Enqueue(T value)
         {
-            head = newNode;
+            QueueNode<T> newNode = new(value);
+            count++;
+
+            if (head == null && tail == null)
+            {
+                head = newNode;
+                tail = newNode;
+                return;
+            }
+
+            tail.SetNext(newNode);
             tail = newNode;
-            return;
         }
 
-        tail.SetNext(newNode);
-        tail = newNode;
-    }
-
-    public T Dequeue()
-    {
-        if (head == null)
+        public T Dequeue()
         {
-            Clear();
-            throw new System.Exception("Queue Empty");
+            if (head == null)
+            {
+                Clear();
+                throw new System.Exception("Queue Empty");
+            }
+
+
+            T value = head.Value;
+            head = head.Next;
+
+            count--;
+            return value;
         }
-
-
-        T value = head.Value;
-        head = head.Next;
-
-        count--;
-        return value;
-    }
-    public T Peek()
-    {
-        if (head == null) 
+        public T Peek()
         {
-            Clear();
-            throw new System.Exception("Queue Empty");
+            if (head == null)
+            {
+                Clear();
+                throw new System.Exception("Queue Empty");
+            }
+
+
+            return head.Value;
         }
-          
+        public void Clear()
+        {
+            head = null;
+            tail = null;
+            count = 0;
+        }
+        #endregion
 
-        return head.Value;
+        #region Getters
+        public int Count => count;
+        #endregion
     }
-    public void Clear()
-    {
-        head = null;
-        tail = null;
-        count = 0;
-    }
-    #endregion
-
-    #region Getters
-    public int Count => count;
-    #endregion
 }
+
