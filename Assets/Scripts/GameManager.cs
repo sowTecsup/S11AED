@@ -1,10 +1,11 @@
 using Sowtank.Collections.Graphs;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class GameManager : MonoBehaviour
 {
     public NonOrientedGraph<string> graph = new();
-
+    public GraphVisualizer visualizer;
 
 
     void Start()
@@ -18,8 +19,10 @@ public class GameManager : MonoBehaviour
         graph.AddEdges(c, b);
         graph.AddEdges(a, d);
 
-        graph.PrintAdjancencyList();
-        graph.PrintAdjacencyMatrix();
+       /* graph.PrintAdjancencyList();
+        graph.PrintAdjacencyMatrix();*/
+
+        visualizer.DrawVisual(graph);
     }
 
     // Update is called once per frame

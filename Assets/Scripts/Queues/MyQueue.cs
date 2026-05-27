@@ -36,11 +36,17 @@ namespace Sowtank.Collections
                 throw new System.Exception("Queue Empty");
             }
 
-
             T value = head.Value;
+
             head = head.Next;
 
             count--;
+
+            if (head == null)
+            {
+                tail = null;
+            }
+
             return value;
         }
         public T Peek()

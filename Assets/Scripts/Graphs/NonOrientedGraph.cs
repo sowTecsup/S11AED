@@ -126,7 +126,7 @@ namespace Sowtank.Collections.Graphs
         }
 
 
-
+        public List<Node<T>> Nodes => nodes;
 
         // añadir conexion
         // remover una conexion
