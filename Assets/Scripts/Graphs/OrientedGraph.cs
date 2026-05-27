@@ -89,6 +89,23 @@ namespace Sowtank.Collections.Graphs
             queue.Enqueue(startNode);
             visited.Add(startNode);
 
+            while(queue.Count > 0)
+            {
+                Node<T> current = queue.Dequeue();
+                action?.Invoke(current);
+
+                foreach (var neighbor in current.Neighbors)
+                {
+                    if(!visited.Contains(neighbor))
+                    {
+                        visited.Add(neighbor);
+                        queue.Enqueue(neighbor);
+                    }
+                   
+                }
+
+            }
+
         }
 
 
