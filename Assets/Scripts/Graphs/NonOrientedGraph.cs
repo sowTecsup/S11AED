@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,6 +78,51 @@ namespace Sowtank.Collections.Graphs
                 context += "\n";
             }
             Debug.Log(context);
+        }
+
+        public void BFS(Node<T> startNode, Action<Node<T>> action)//->colas
+        {
+            List<Node<T>> visited = new List<Node<T>>(); //-> los que ya revise
+            MyQueue<Node<T>> queue = new MyQueue<Node<T>>();    //-> los que estoy revisando
+
+            queue.Enqueue(startNode);
+            visited.Add(startNode);
+
+            while (queue.Count > 0)
+            {
+                Node<T> current = queue.Dequeue();
+                action?.Invoke(current);
+
+                foreach (var neighbor in current.Neighbors)
+                {
+                    if (!visited.Contains(neighbor))
+                    {
+                        visited.Add(neighbor);
+                        queue.Enqueue(neighbor);
+                    }
+                }
+            }
+        }
+        public void DFS(Node<T> startNode, Action<Node<T>> action)//-> similar pila
+        {
+            List<Node<T>> visited = new List<Node<T>>(); //-> los que ya revise
+            DFSRecursive(startNode, visited, action);
+        }
+        public void DFSRecursive(Node<T> current, List<Node<T>> visited, Action<Node<T>> action)
+        {
+            if (current == null)
+                return;
+
+            visited.Add(current);
+            action?.Invoke(current);
+
+            foreach (var neighbor in current.Neighbors)
+            {
+                if (!visited.Contains(neighbor))
+                {
+                    DFSRecursive(neighbor, visited, action);
+                }
+            }
         }
 
 
