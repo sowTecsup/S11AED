@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Sowtank.Collections.Graphs
 {
-    public class NonOrientedGraph<T>
+    public class OrientedGraph<T>
     {
         private List<Node<T>> nodes = new();
 
         //-> añadir un nodo
         public Node<T> AddNode(T value)
         {
-            Node<T> newNode = new Node<T>(value); 
+            Node<T> newNode = new Node<T>(value);
             nodes.Add(newNode);
 
             return newNode;
@@ -25,31 +25,31 @@ namespace Sowtank.Collections.Graphs
                 other.DisconnectBidirectional(node);
             }
         }
-        public void AddEdges(Node<T> a , Node<T> b)
+        public void AddEdges(Node<T> a, Node<T> b)
         {
-            a.ConnectBidirectional(b);
+            a.ConnectUniDirectional(b);
         }
         public void AddEdges(int posA, int posB)
         {
-            nodes[posA].ConnectBidirectional(nodes[posB]);
+            nodes[posA].ConnectUniDirectional(nodes[posB]);
         }
         public void DeleteEdges(Node<T> a, Node<T> b)
         {
-            a.DisconnectBidirectional(b);
+            a.DisconnectUnidirectional(b);
         }
 
         public void PrintAdjancencyList()//-> cuadratica
         {
             for (var i = 0; i < nodes.Count; i++)
             {
-                string nodeList =  "Node Nro : " + nodes[i].Value.ToString() + " =>";
+                string nodeList = "Node Nro : " + nodes[i].Value.ToString() + " =>";
 
                 //-> i => posoicion
-                for(var j = 0;j < nodes[i].Neighbors.Count;j++)
+                for (var j = 0; j < nodes[i].Neighbors.Count; j++)
                 {
                     //-> j cada vecino de i
 
-                    nodeList +=  nodes[i].Neighbors[j].Value.ToString() + ", ";
+                    nodeList += nodes[i].Neighbors[j].Value.ToString() + ", ";
                 }
 
                 Debug.Log(nodeList);
@@ -62,15 +62,15 @@ namespace Sowtank.Collections.Graphs
             Debug.Log("Matriz de adyacencia");
             string context = "    ";
 
-            for (var i = 0;i < nodes.Count;i++)
+            for (var i = 0; i < nodes.Count; i++)
             {
                 context += i + "     ";
             }
             context += "\n";
-            for (var i = 0;i< nodes.Count ; i++)
+            for (var i = 0; i < nodes.Count; i++)
             {
                 context += i + "    ";//\n
-                for(var j = 0; j < nodes.Count; j++)
+                for (var j = 0; j < nodes.Count; j++)
                 {
                     context += nodes[i].Neighbors.Contains(nodes[j]) ? "  1  " : "  0  ";
                 }
@@ -81,8 +81,5 @@ namespace Sowtank.Collections.Graphs
 
 
 
-
-        // añadir conexion
-        // remover una conexion
     }
 }

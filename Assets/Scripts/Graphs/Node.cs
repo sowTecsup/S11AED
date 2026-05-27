@@ -14,7 +14,7 @@ namespace Sowtank.Collections.Graphs
             this.value = value;
         }
 
-        public void Connect(Node<T> node)//->bidireccional
+        public void ConnectBidirectional(Node<T> node)//->bidireccional
         {
             if (!neighbors.Contains(node))
             {
@@ -22,12 +22,23 @@ namespace Sowtank.Collections.Graphs
             }
             node.neighbors.Add(this);
         }
-        public void Disconnect(Node<T> node)//> bidireccional
+        public void ConnectUniDirectional(Node<T> node)
+        {
+            if (!neighbors.Contains(node))
+                neighbors.Add(node);
+        }
+        public void DisconnectBidirectional(Node<T> node)//> bidireccional
         {
             if (neighbors.Contains(node))
                 neighbors.Remove(node);
 
             node.neighbors.Remove(this);
+        }
+        public void DisconnectUnidirectional(Node<T> node)//> bidireccional
+        {
+            if (neighbors.Contains(node))
+                neighbors.Remove(node);
+
         }
 
         public T Value => value;
